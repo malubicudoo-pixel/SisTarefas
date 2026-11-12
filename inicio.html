@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="inicio.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">SisTarefas</div>
+        <nav class="menu">
+            <a href="#" id="link-inicio" class="ativo" onclick="mostrarSecao('secao-inicio', this)">Início</a>
+            <a href="#" id="link-perfil" onclick="mostrarSecao('secao-perfil', this)">Perfil</a>
+            <a href="#" id="link-config" onclick="mostrarSecao('secao-config', this)">Configurações</a>
+            <a href="#" onclick="sairDoSistema()" class="btn-sair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="container">
+      
+        <div id="secao-inicio" class="secao-ativa">
+            <section class="boas-vindas">
+                <h1 id="mensagem-boas-vindas">Olá, bem-vindo de volta!</h1>
+                <p>Você acessou sua área restrita com sucesso.</p>
+            </section>
+
+            <section class="cards-grid">
+                <div class="card">
+                    <h3>Meus Dados</h3>
+                    <p>Visualize e atualize suas informações pessoais e de contato.</p>
+                    <button onclick="mostrarSecao('secao-perfil', document.getElementById('link-perfil'))">Acessar</button>
+                </div>
+
+                <div class="card">
+                    <h3>Notificações</h3>
+                    <p>Você tem <strong id="contador-avisos">3</strong> novas mensagens aguardando leitura.</p>
+                    <button onclick="mostrarSecao('secao-notificacoes')">Ver avisos</button>
+                </div>
+
+                <div class="card">
+                    <h3>Atividades</h3>
+                    <p>Acompanhe seu histórico recente de acessos e ações.</p>
+                    <button onclick="mostrarSecao('secao-atividades')">Histórico</button>
+                </div>
+            </section>
+        </div>
+
+       
+        <div id="secao-perfil" class="secao-oculta">
+            <section class="painel-interno">
+                <h2>Meu Perfil</h2>
+                <p class="sub-painel">Atualize seus dados cadastrados no sistema.</p>
+                
+                <form onsubmit="salvarPerfil(event)" class="form-interno">
+                    <div class="grupo-input">
+                        <label for="edit-nome">Nome Completo</label>
+                        <input type="text" id="edit-nome" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="edit-email">E-mail</label>
+                        <input type="email" id="edit-email" required>
+                    </div>
+                    <button type="submit" class="btn-primario">Salvar Alterações</button>
+                </form>
+            </section>
+        </div>
+
+        
+        <div id="secao-notificacoes" class="secao-oculta">
+            <section class="painel-interno">
+                <div class="topo-painel">
+                    <h2>Notificações</h2>
+                    <button onclick="limparNotificacoes()" class="btn-secundario">Marcar todas como lidas</button>
+                </div>
+                <ul id="lista-avisos" class="lista-itens">
+                    <li><strong>Bem-vindo:</strong> Seu cadastro foi ativado com sucesso.</li>
+                    <li><strong>Segurança:</strong> Novo acesso detectado neste navegador.</li>
+                    <li><strong>Dica:</strong> Complete seus dados na aba Perfil.</li>
+                </ul>
+                <button onclick="mostrarSecao('secao-inicio', document.getElementById('link-inicio'))" class="btn-voltar">Voltar ao Início</button>
+            </section>
+        </div>
+
+        
+        <div id="secao-atividades" class="secao-oculta">
+            <section class="painel-interno">
+                <h2>Histórico de Atividades</h2>
+                <p class="sub-painel">Registro das suas últimas ações nesta sessão.</p>
+                <ul id="lista-atividades" class="lista-itens">
+                    <li>Login realizado com sucesso hoje.</li>
+                </ul>
+                <button onclick="mostrarSecao('secao-inicio', document.getElementById('link-inicio'))" class="btn-voltar">Voltar ao Início</button>
+            </section>
+        </div>
+
+       
+        <div id="secao-config" class="secao-oculta">
+            <section class="painel-interno">
+                <h2>Configurações</h2>
+                <p class="sub-painel">Preferências da sua conta e aparência do sistema.</p>
+                
+                <div class="opcao-config">
+                    <span>Modo Escuro (Tema Noturno)</span>
+                    <button onclick="alternarTema()" class="btn-primario">Ativar / Desativar</button>
+                </div>
+
+                <div class="opcao-config zona-perigo">
+                    <span>Excluir minha conta deste navegador</span>
+                    <button onclick="excluirConta()" class="btn-perigo">Apagar Cadastro</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+       
+        let usuario = JSON.parse(localStorage.getItem("usuarioCadastrado"));
+
+        if (usuario) {
+            document.getElementById("mensagem-boas-vindas").innerText = "Olá, " + usuario.nome + "!";
+            document.getElementById("edit-nome").value = usuario.nome;
+            document.getElementById("edit-email").value = usuario.email;
+        }
+
+      
+        function mostrarSecao(idSecao, linkClicado) {
+            const secoes = document.querySelectorAll(".secao-ativa, .secao-oculta");
+            secoes.forEach(sec => {
+                sec.classList.remove("secao-ativa");
+                sec.classList.add("secao-oculta");
+            });
+
+            document.getElementById(idSecao).classList.remove("secao-oculta");
+            document.getElementById(idSecao).classList.add("secao-ativa");
+
+            if (linkClicado) {
+                document.querySelectorAll(".menu a").forEach(a => a.classList.remove("ativo"));
+                linkClicado.classList.add("ativo");
+            }
+        }
+
+        
+        function salvarPerfil(event) {
+            event.preventDefault();
+            if (!usuario) usuario = {};
+
+            usuario.nome = document.getElementById("edit-nome").value;
+            usuario.email = document.getElementById("edit-email").value;
+
+            localStorage.setItem("usuarioCadastrado", JSON.stringify(usuario));
+            document.getElementById("mensagem-boas-vindas").innerText = "Olá, " + usuario.nome + "!";
+            
+            registrarAtividade("Dados do perfil atualizados.");
+            alert("Perfil atualizado com sucesso!");
+        }
+
+        // Limpa notificações
+        function limparNotificacoes() {
+            document.getElementById("lista-avisos").innerHTML = "<li>Nenhuma notificação pendente.</li>";
+            document.getElementById("contador-avisos").innerText = "0";
+            registrarAtividade("Notificações marcadas como lidas.");
+        }
+        function registrarAtividade(texto) {
+            const lista = document.getElementById("lista-atividades");
+            const novoItem = document.createElement("li");
+            const hora = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            novoItem.innerText = `[${hora}] ${texto}`;
+            lista.prepend(novoItem);
+        }
+
+        // Alterna Modo Escuro
+        function alternarTema() {
+            document.body.classList.toggle("dark-mode");
+            registrarAtividade("Tema visual alterado.");
+        }
+
+        // Exclui a conta do LocalStorage
+        function excluirConta() {
+            if (confirm("Tem certeza que deseja apagar seu cadastro?")) {
+                localStorage.removeItem("usuarioCadastrado");
+                window.location.href = "indexlogin.html";
+            }
+        }
+
+        // Sai para o login
+        function sairDoSistema() {
+            window.location.href = "indexlogin.html";
+        }
+    </script>
+</body>
+</html>

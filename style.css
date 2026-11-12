@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'segoe ui', Tahoma, Geneva, Verdana, sans-serif;:
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg,#2b32b2 0%,#1488cc 100%);
+}
+.login-card {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-card h2{
+    text-align: center;
+    margin-bottom: 5px;
+    color: #1e293b;
+    font-size: 26px;
+}
+
+.subtitulo{
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.campo{
+    margin-bottom: 18px;
+}
+
+.campo label{
+    display: block;
+    margin-bottom: 6px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo input{
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1e293b;
+    transition: all 0.3s ease;
+    outline: none;
+}
+/* Destaque ao clicar no campo */
+.campo input:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    /* Mantém o tom azul-esverdeado do seu botão original */
+    background-color: #0d9488;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #0f766e;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+.senha-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.senha-wrapper input {
+    padding-right: 42px;
+}
+
+.btn-olho {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-olho:hover {
+    background: none;
+    color: #1e293b;
+}
+
+.link-alternativo {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.link-alternativo a {
+    color: #0d9488;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-alternativo a:hover {
+    text-decoration: underline;
+}

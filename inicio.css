@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Barra superior com o mesmo degradê do login */
+.navbar {
+    background: linear-gradient(135deg, #2b32b2 0%, #1488cc 100%);
+    color: #ffffff;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.menu a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover, .menu a.ativo {
+    color: #ffffff;
+}
+
+/* Botão Sair destacado */
+.menu .btn-sair {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: #ffffff;
+}
+
+.menu .btn-sair:hover {
+    background-color: #ef4444;
+}
+
+/* Área central */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.boas-vindas {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.boas-vindas h1 {
+    font-size: 26px;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.boas-vindas p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Grade de cartões */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.card p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Botão verde seguindo a identidade do login */
+.card button {
+    padding: 10px 16px;
+    background-color: #0d9488;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #0f766e;
+}
+/* Controle de exibição das telas */
+.secao-oculta {
+    display: none;
+}
+
+.secao-ativa {
+    display: block;
+    animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Painéis internos (Perfil, Avisos, Config) */
+.painel-interno {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.painel-interno h2 {
+    margin-bottom: 6px;
+    font-size: 22px;
+}
+
+.sub-painel {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.topo-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Formulário do Perfil */
+.form-interno {
+    max-width: 450px;
+}
+
+.grupo-input {
+    margin-bottom: 16px;
+}
+
+.grupo-input label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.grupo-input input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.grupo-input input:focus {
+    border-color: #0ea5e9;
+}
+
+/* Listas de Notificações e Atividades */
+.lista-itens {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.lista-itens li {
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+}
+
+/* Opções de Configuração */
+.opcao-config {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Botões extras */
+.btn-primario, .btn-secundario, .btn-voltar, .btn-perigo {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-primario { background-color: #0d9488; color: #fff; }
+.btn-secundario { background-color: #e2e8f0; color: #1e293b; }
+.btn-voltar { background-color: #334155; color: #fff; }
+.btn-perigo { background-color: #ef4444; color: #fff; }
+
+.btn-primario:hover, .btn-secundario:hover, .btn-voltar:hover, .btn-perigo:hover {
+    opacity: 0.9;
+}
+
+/* MODO ESCURO */
+body.dark-mode {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark-mode .boas-vindas,
+body.dark-mode .card,
+body.dark-mode .painel-interno {
+    background-color: #1e293b;
+    color: #f8fafc;
+}
+
+body.dark-mode .boas-vindas h1,
+body.dark-mode .card h3 {
+    color: #f8fafc;
+}
+
+body.dark-mode .boas-vindas p,
+body.dark-mode .card p,
+body.dark-mode .sub-painel {
+    color: #94a3b8;
+}
+
+body.dark-mode .grupo-input input {
+    background-color: #0f172a;
+    border-color: #334155;
+    color: #fff;
+}
+
+body.dark-mode .lista-itens li,
+body.dark-mode .opcao-config {
+    border-color: #334155;
+}
